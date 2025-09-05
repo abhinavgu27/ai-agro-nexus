@@ -41,7 +41,7 @@ const PredictionForm = () => {
   };
 
   return (
-    <section className="py-16 bg-gradient-subtle">
+    <section id="prediction" className="py-16 bg-gradient-subtle">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">

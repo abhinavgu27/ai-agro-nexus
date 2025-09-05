@@ -1,10 +1,27 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Mail, Phone, MapPin, ExternalLink } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Footer = () => {
+  const { toast } = useToast();
+
+  const handleLearnMore = () => {
+    toast({
+      title: "Learn More",
+      description: "More information about our AI platform is coming soon!",
+    });
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer id="footer" className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-4 gap-8">
           {/* About */}
@@ -18,7 +35,12 @@ const Footer = () => {
             <p className="text-primary-foreground/80 mb-4">
               Government-backed AI platform for precise crop yield predictions and sustainable farming solutions.
             </p>
-            <Button variant="outline" size="sm" className="bg-transparent text-primary-foreground border-primary-foreground hover:bg-primary-foreground hover:text-primary">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="bg-transparent text-primary-foreground border-primary-foreground hover:bg-primary-foreground hover:text-primary"
+              onClick={handleLearnMore}
+            >
               Learn More
               <ExternalLink className="h-4 w-4 ml-2" />
             </Button>
@@ -28,11 +50,11 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <div className="space-y-2">
-              <a href="#" className="block text-primary-foreground/80 hover:text-primary-foreground transition-smooth">Dashboard</a>
-              <a href="#" className="block text-primary-foreground/80 hover:text-primary-foreground transition-smooth">Predictions</a>
-              <a href="#" className="block text-primary-foreground/80 hover:text-primary-foreground transition-smooth">Analytics</a>
-              <a href="#" className="block text-primary-foreground/80 hover:text-primary-foreground transition-smooth">Resources</a>
-              <a href="#" className="block text-primary-foreground/80 hover:text-primary-foreground transition-smooth">Support</a>
+              <button onClick={() => scrollToSection('hero')} className="block text-primary-foreground/80 hover:text-primary-foreground transition-smooth">Home</button>
+              <button onClick={() => scrollToSection('prediction')} className="block text-primary-foreground/80 hover:text-primary-foreground transition-smooth">Predictions</button>
+              <button onClick={() => scrollToSection('stats')} className="block text-primary-foreground/80 hover:text-primary-foreground transition-smooth">Analytics</button>
+              <button onClick={() => scrollToSection('hero')} className="block text-primary-foreground/80 hover:text-primary-foreground transition-smooth">Resources</button>
+              <button onClick={() => scrollToSection('footer')} className="block text-primary-foreground/80 hover:text-primary-foreground transition-smooth">Support</button>
             </div>
           </div>
 

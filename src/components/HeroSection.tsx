@@ -1,11 +1,22 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, Cpu, BarChart3, Leaf } from "lucide-react";
 import heroBanner from "@/assets/hero-banner.jpg";
+import DemoModal from "./DemoModal";
 
 const HeroSection = () => {
+  const [isDemoOpen, setIsDemoOpen] = useState(false);
+
+  const scrollToPrediction = () => {
+    const element = document.getElementById('prediction');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="relative bg-gradient-subtle py-20 overflow-hidden">
+    <section id="hero" className="relative bg-gradient-subtle py-20 overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -37,11 +48,20 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button variant="hero" size="lg" className="animate-pulse-glow">
+            <Button 
+              variant="hero" 
+              size="lg" 
+              className="animate-pulse-glow"
+              onClick={scrollToPrediction}
+            >
               Start Prediction
               <ArrowRight className="h-5 w-5 ml-2" />
             </Button>
-            <Button variant="outline" size="lg">
+            <Button 
+              variant="outline" 
+              size="lg"
+              onClick={() => setIsDemoOpen(true)}
+            >
               View Demo
             </Button>
           </div>
@@ -74,6 +94,8 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+      
+      <DemoModal isOpen={isDemoOpen} onClose={() => setIsDemoOpen(false)} />
     </section>
   );
 };
